@@ -1,0 +1,38 @@
+{
+    "name": "sanamhub/nepdate-patro",
+    "description": "Tithi, gazetted public holidays and events for the Bikram Sambat calendar, for sanamhub/nepdate.",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/sanamhub/nepdate-php",
+    "keywords": [
+        "nepali-date",
+        "bikram-sambat",
+        "patro",
+        "nepali-calendar",
+        "tithi"
+    ],
+    "authors": [
+        {
+            "name": "Sanam Pakuwal",
+            "homepage": "https://github.com/sanamhub"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/sanamhub/nepdate-php/issues",
+        "source": "https://github.com/sanamhub/nepdate-php"
+    },
+    "require": {
+        "php": "^8.3",
+        "sanamhub/nepdate": "^0.2.0-rc.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "NepDate\\Patro\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
