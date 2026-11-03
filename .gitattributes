@@ -1,0 +1,5 @@
+# What a Composer archive of this package leaves out: it needs its source, its manifest, the
+# licence, the notice and the readme, and nothing else (ADR-0007).
+/tests export-ignore
+/scripts export-ignore
+/.gitattributes export-ignore
