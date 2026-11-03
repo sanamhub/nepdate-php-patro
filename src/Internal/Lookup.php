@@ -11,7 +11,11 @@ namespace NepDate\Patro\Internal;
  */
 final class Lookup
 {
-    /** The index of `$value` in `$sorted`, or -1 if absent. At most 11 comparisons for 2199 years. */
+    /**
+     * The index of `$value` in `$sorted`, or -1 if absent. At most 11 comparisons for 2199 years.
+     *
+     * @param list<int> $sorted
+     */
     public static function indexOf(array $sorted, int $value): int
     {
         $lo = 0;
@@ -32,7 +36,11 @@ final class Lookup
         return -1;
     }
 
-    /** Whether `$value` is present in the ascending `list<int>` `$sorted`. */
+    /**
+     * Whether `$value` is present in the ascending `$sorted`.
+     *
+     * @param list<int> $sorted
+     */
     public static function contains(array $sorted, int $value): bool
     {
         return self::indexOf($sorted, $value) >= 0;

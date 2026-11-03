@@ -8,10 +8,12 @@ use NepDate\NepaliDate;
 use NepDate\NepaliDateRange;
 use NepDate\Patro\Internal\Lookup;
 use NepDate\Patro\Internal\PatroTable;
+use NepDate\Patro\Internal\Serials;
 
 /**
- * The patro query surface (PATRO.md §2, API.md NT07): a free function, not a static method,
- * matching every other port's module-level `info(d)`.
+ * Everything the patro knows about one BS date (PATRO.md §2, API.md NT07).
+ *
+ * @param NepaliDate $date the day to look up
  */
 function info(NepaliDate $date): CalendarInfo
 {
@@ -19,11 +21,8 @@ function info(NepaliDate $date): CalendarInfo
 
     $tithi = null;
     if ($serial >= PatroTable::TITHI_FIRST_SERIAL && $serial <= PatroTable::TITHI_LAST_SERIAL) {
-        $index = PatroTable::TITHI_INDEX[$serial - PatroTable::TITHI_FIRST_SERIAL];
-        $tithi = new Tithi(PatroTable::NAMES[$index][0], PatroTable::NAMES[$index][1]);
+        $tithi = new Tithi(...PatroTable::NAMES[PatroTable::TITHI_INDEX[$serial - PatroTable::TITHI_FIRST_SERIAL]]);
     }
-
-    $isHoliday = Lookup::contains(PatroTable::HOLIDAY_SERIALS, $serial);
 
     $events = [];
     $dayIndex = Lookup::indexOf(PatroTable::EVENT_DAY_SERIALS, $serial);
@@ -31,33 +30,31 @@ function info(NepaliDate $date): CalendarInfo
         $start = PatroTable::EVENT_START[$dayIndex];
         $end = PatroTable::EVENT_START[$dayIndex + 1];
         for ($i = $start; $i < $end; $i++) {
-            $nameIndex = PatroTable::EVENTS_FLAT[$i];
-            $events[] = new NepEvent(PatroTable::NAMES[$nameIndex][0], PatroTable::NAMES[$nameIndex][1]);
+            $events[] = new NepEvent(...PatroTable::NAMES[PatroTable::EVENTS_FLAT[$i]]);
         }
     }
 
-    return new CalendarInfo($tithi, $isHoliday, $events);
+    return new CalendarInfo($tithi, Lookup::contains(PatroTable::HOLIDAY_SERIALS, $serial), $events);
 }
 
-/** The smallest BS range containing every day with any tithi, holiday or event data (PATRO.md §2). */
+/**
+ * The smallest BS range containing every day with any tithi, holiday or event data
+ * (PATRO.md §2).
+ */
 function coverage(): NepaliDateRange
 {
     return NepaliDateRange::of(
-        dateFromSerial(PatroTable::FIRST_SERIAL),
-        dateFromSerial(PatroTable::LAST_SERIAL),
+        Serials::toDate(PatroTable::FIRST_SERIAL),
+        Serials::toDate(PatroTable::LAST_SERIAL),
     );
 }
 
-/** @return list<NepaliDate> every gazetted public holiday, ascending (PATRO.md §2) */
+/**
+ * Every gazetted public holiday, ascending (PATRO.md §2).
+ *
+ * @return list<NepaliDate>
+ */
 function publicHolidays(): array
 {
-    return array_map(dateFromSerial(...), PatroTable::HOLIDAY_SERIALS);
-}
-
-/** @internal */
-function dateFromSerial(int $serial): NepaliDate
-{
-    [$y, $m, $d] = \NepDate\Internal\Calendar::fromSerial($serial);
-
-    return NepaliDate::fromBs($y, $m, $d);
+    return array_map(Serials::toDate(...), PatroTable::HOLIDAY_SERIALS);
 }
