@@ -11,7 +11,7 @@ use NepDate\Patro\Internal\PatroTable;
 use NepDate\Patro\Internal\Serials;
 
 /**
- * Everything the patro knows about one BS date (PATRO.md §2, API.md NT07).
+ * Everything the patro knows about one BS date (PATRO.md §2).
  *
  * @param NepaliDate $date the day to look up
  */

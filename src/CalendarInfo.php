@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace NepDate\Patro;
 
 /**
- * Everything the patro knows about one BS date (PATRO.md §2, API.md NT01-NT06). `info()` never
+ * Everything the patro knows about one BS date (PATRO.md §2). `info()` never
  * fails: a date without data returns tithi `null`, `isPublicHoliday()` false and an empty
  * `events()` list.
  */
