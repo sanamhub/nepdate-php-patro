@@ -3,7 +3,7 @@
     "description": "Tithi, gazetted public holidays and events for the Bikram Sambat calendar, for sanamhub/nepdate.",
     "type": "library",
     "license": "MIT",
-    "version": "0.2.0-rc.1",
+    "version": "1.0.0-rc.1",
     "homepage": "https://github.com/sanamhub/nepdate-php",
     "keywords": [
         "nepali-date",
@@ -24,7 +24,7 @@
     },
     "require": {
         "php": "^8.3",
-        "sanamhub/nepdate": "^0.2.0-rc.1"
+        "sanamhub/nepdate": "^1.0.0-rc.1"
     },
     "autoload": {
         "psr-4": {

@@ -16,8 +16,8 @@ from the core [`sanamhub/nepdate`](https://packagist.org/packages/sanamhub/nepda
 the hub [`sanamhub/nepdate`](https://github.com/sanamhub/nepdate), which derives it from the C#
 original, [NepDate](https://github.com/RajuPrasai/NepDate).
 
-> **Status:** 0.2.0-rc.1, a release candidate, on Packagist; the API may change before 0.2.0. The
-> data is informational, not an official calendar.
+> **Status:** 1.0.0-rc.1, the release candidate on the 1.0 line, on Packagist; the API is stable
+> from 1.0 (hub ADR-0009). The data is informational, not an official calendar.
 
 ## Install
 
